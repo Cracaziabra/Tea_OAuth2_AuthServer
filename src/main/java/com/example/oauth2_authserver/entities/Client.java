@@ -43,26 +43,4 @@ public class Client {
         this.secret = secret;
         this.authMethod = authMethod;
     }
-
-    public static Client from(RegisteredClient registeredClient) {
-        Client client = new Client();
-        client.setClientId(registeredClient.getClientId());
-        client.setSecret(registeredClient.getClientSecret());
-        client.setRedirectUris(registeredClient.getRedirectUris().stream().map(RedirectUri::new).collect(Collectors.toSet()));
-        client.setScopes(registeredClient.getScopes().stream().map(Scope::new).collect(Collectors.toSet()));
-        client.setGrantTypes(registeredClient.getAuthorizationGrantTypes().stream().map(GrantType::new).collect(Collectors.toSet()));
-        return client;
-    }
-
-    public static RegisteredClient from(Client client) {
-        return RegisteredClient.withId(String.valueOf(client.getId()))
-                .clientId(client.getClientId())
-                .clientSecret(client.getSecret())
-                .clientAuthenticationMethod(new ClientAuthenticationMethod(client.getAuthMethod()))
-                .scopes(a -> a.addAll(client.getScopes().stream().map(Scope::getScope).collect(Collectors.toSet())))
-                .redirectUris(uris -> uris.addAll(client.getRedirectUris().stream().map(RedirectUri::getRedirectUri).collect(Collectors.toSet())))
-                .authorizationGrantTypes(a -> a.addAll(client.getGrantTypes().stream().map(GrantType::getGrantType).collect(Collectors.toSet())))
-                .tokenSettings(TokenSettings.builder().accessTokenTimeToLive(Duration.ofMinutes(1)).build())
-                .build();
-    }
 }
