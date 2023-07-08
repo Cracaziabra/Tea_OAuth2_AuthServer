@@ -1,18 +1,13 @@
 package com.example.oauth2_authserver.entities;
 
-import com.example.oauth2_authserver.converters.GrantTypeToAuthGrantTypeConverter;
 import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.security.oauth2.core.AuthorizationGrantType;
-import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
-import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
-import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import java.time.Duration;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -43,7 +38,7 @@ public class Client {
     @ToString.Exclude
     private Set<GrantType> grantTypes = new HashSet<>();
 
-    public Client(String clientId, String secret, String redirectUri, String authMethod) {
+    public Client(String clientId, String secret, String authMethod) {
         this.clientId = clientId;
         this.secret = secret;
         this.authMethod = authMethod;
