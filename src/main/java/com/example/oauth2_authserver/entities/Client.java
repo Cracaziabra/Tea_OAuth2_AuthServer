@@ -1,21 +1,17 @@
 package com.example.oauth2_authserver.entities;
 
-import com.example.oauth2_authserver.converters.GrantTypeToAuthGrantTypeConverter;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.security.oauth2.core.AuthorizationGrantType;
-import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
-import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
-import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
+import lombok.Setter;
+import lombok.ToString;
 
-import java.time.Duration;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "clients")
 @NoArgsConstructor
@@ -30,15 +26,19 @@ public class Client {
     private String authMethod;
 
     @ManyToMany(targetEntity = RedirectUri.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ToString.Exclude
     private Set<RedirectUri> redirectUris = new HashSet<>();
 
     @ManyToMany(targetEntity = Scope.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ToString.Exclude
+
     private Set<Scope> scopes = new HashSet<>();
 
     @ManyToMany(targetEntity = GrantType.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ToString.Exclude
     private Set<GrantType> grantTypes = new HashSet<>();
 
-    public Client(String clientId, String secret, String redirectUri, String authMethod) {
+    public Client(String clientId, String secret, String authMethod) {
         this.clientId = clientId;
         this.secret = secret;
         this.authMethod = authMethod;

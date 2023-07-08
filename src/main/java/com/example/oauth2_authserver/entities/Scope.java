@@ -3,7 +3,9 @@ package com.example.oauth2_authserver.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "scopes")
 @NoArgsConstructor
@@ -13,7 +15,6 @@ public class Scope {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Convert(converter = ScopeToStringConverter.class)
     private String scope;
 
     public Scope(String scope) {

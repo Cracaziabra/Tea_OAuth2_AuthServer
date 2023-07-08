@@ -1,10 +1,11 @@
 package com.example.oauth2_authserver.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "redirectUri")
 @NoArgsConstructor

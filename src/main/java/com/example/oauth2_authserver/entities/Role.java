@@ -1,12 +1,12 @@
 package com.example.oauth2_authserver.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "roles")
 @NoArgsConstructor

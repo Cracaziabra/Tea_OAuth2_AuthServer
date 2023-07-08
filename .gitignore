@@ -4,9 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-application.yml
+resources/
 mvnw.cmd
 mvnw
+.mvn
 
 ### STS ###
 .apt_generated
