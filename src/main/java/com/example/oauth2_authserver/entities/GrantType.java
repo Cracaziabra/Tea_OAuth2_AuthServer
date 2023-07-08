@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "grantTypes")
 @NoArgsConstructor

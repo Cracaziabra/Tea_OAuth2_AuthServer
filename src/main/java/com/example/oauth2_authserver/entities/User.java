@@ -6,7 +6,9 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
@@ -20,6 +22,7 @@ public class User {
     private String password;
 
     @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ToString.Exclude
     private Set<Role> roles = new HashSet<>();
 
     public User(String username, String password) {
