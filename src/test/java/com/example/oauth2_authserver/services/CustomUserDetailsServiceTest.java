@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
 
@@ -20,24 +21,22 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class CustomUserDetailsServiceTest {
-    static UserRepository userRepository = mock(UserRepository.class);
-
     @InjectMocks
     CustomUserDetailsService service;
 
-    @BeforeAll
-    static void setup() {
-        User user = new User();
-        user.setUsername("admin");
-        when(userRepository.findUserByUsername("admin")).thenReturn(Optional.of(user));
-    }
+    @Mock
+    UserRepository userRepository;
 
     @Test
     void findExistedUserByUsername() {
-        SecurityUser foundedUser = (SecurityUser) service.loadUserByUsername("admin");
+        User user = new User("admin", "password");
+        when(userRepository.findUserByUsername("admin")).thenReturn(Optional.of(user));
+        var foundedUser = service.loadUserByUsername("admin");
         assertNotNull(foundedUser);
         assertEquals("admin", foundedUser.getUsername());
+        assertEquals("password", foundedUser.getPassword());
     }
 
     @Test
