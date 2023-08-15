@@ -11,4 +11,9 @@
 К приложению написаны тесты для сервисов. С помощью GitHub Actions организована проверка тестов при push и pull-request операциях.
 
 ## Изученные технологии
-Spring (Boot, Security, Data JPA, Test), OAuth2, PostgreSQL, Maven, Git, GitHub (+CI).
+Spring (Boot, Security, Data JPA, Test)\
+OAuth2\
+PostgreSQL\
+Maven\
+Git\
+GitHub (+CI)
